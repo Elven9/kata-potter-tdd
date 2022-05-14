@@ -35,6 +35,7 @@ func TestBuyHarryPotter(t *testing.T) {
 		{3, 1, 2, 1, 1, 53.2},
 
 		// Edge Cases
+		{3, 2, 2, 2, 2, 68},
 		{2, 2, 2, 1, 1, 51.2},
 		{5, 5, 4, 5, 4, 141.2},
 	}
