@@ -2,8 +2,15 @@ package katapotter
 
 import (
 	"fmt"
+	"math"
 	"testing"
 )
+
+// Utility
+func testFloatEquality(a float32, b float32) bool {
+	// Compare down to 2-digit precision
+	return math.Abs(float64(a-b)) < 0.01
+}
 
 func TestBuyHarryPotter(t *testing.T) {
 	testCases := []struct {
@@ -27,7 +34,7 @@ func TestBuyHarryPotter(t *testing.T) {
 		), func(t *testing.T) {
 			result := BuyHarryPotter(c.s1, c.s2, c.s3, c.s4, c.s5)
 
-			if result != c.price {
+			if !testFloatEquality(result, c.price) {
 				t.Errorf("Got %5.2f, want %5.2f", result, c.price)
 			}
 		})
