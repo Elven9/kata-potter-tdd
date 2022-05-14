@@ -21,14 +21,22 @@ func TestBuyHarryPotter(t *testing.T) {
 		s5    int
 		price float32
 	}{
+		// One Discount
 		{1, 0, 0, 0, 0, 8.0},
 		{1, 1, 0, 0, 0, 15.2},
 		{1, 1, 1, 0, 0, 21.6},
 		{1, 1, 1, 1, 0, 25.6},
 		{1, 1, 1, 1, 1, 30.0},
+		{0, 0, 2, 1, 0, 23.2},
+
+		// Several Discount
 		{3, 1, 0, 0, 0, 31.2},
 		{5, 1, 2, 1, 0, 64.8},
 		{3, 1, 2, 1, 1, 53.2},
+
+		// Edge Cases
+		{2, 2, 2, 1, 1, 51.2},
+		{5, 5, 4, 5, 4, 141.2},
 	}
 	for _, c := range testCases {
 		t.Run(fmt.Sprintf(
