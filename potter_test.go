@@ -52,3 +52,50 @@ func TestBuyHarryPotter(t *testing.T) {
 		})
 	}
 }
+
+func TestBuyHarryPotterExampleSolution(t *testing.T) {
+	testCases := []struct {
+		s1    int
+		s2    int
+		s3    int
+		s4    int
+		s5    int
+		price float32
+	}{
+		// Basic
+		{0, 0, 0, 0, 0, 0},
+		{0, 1, 0, 0, 0, 8},
+		{0, 0, 1, 0, 0, 8},
+		{0, 0, 0, 1, 0, 8},
+		{0, 0, 0, 0, 1, 8},
+		{0, 3, 0, 0, 0, 24},
+
+		// Simple Discount
+		{1, 1, 0, 0, 0, 8 * 2 * 0.95},
+		{1, 0, 1, 0, 1, 8 * 3 * 0.9},
+		{1, 1, 1, 0, 1, 8 * 4 * 0.8},
+		{1, 1, 1, 1, 1, 8 * 5 * 0.75},
+
+		// Several Discount
+		{2, 1, 0, 0, 0, 8 + (8 * 2 * 0.95)},
+		{2, 2, 0, 0, 0, 2 * (8 * 2 * 0.95)},
+		{2, 1, 2, 1, 0, (8 * 4 * 0.8) + (8 * 2 * 0.95)},
+		{1, 2, 1, 1, 1, 8 + (8 * 5 * 0.75)},
+
+		// Edge Cases
+		{2, 2, 2, 1, 1, 2 * (8 * 4 * 0.8)},
+		{5, 5, 4, 5, 4, 3*(8*5*0.75) + 2*(8*4*0.8)},
+	}
+	for _, c := range testCases {
+		t.Run(fmt.Sprintf(
+			"S1: %d, S2: %d, S3: %d, S4: %d, S5: %d",
+			c.s1, c.s2, c.s3, c.s4, c.s5,
+		), func(t *testing.T) {
+			result := BuyHarryPotter(c.s1, c.s2, c.s3, c.s4, c.s5)
+
+			if !testFloatEquality(result, c.price) {
+				t.Errorf("Got %5.2f, want %5.2f", result, c.price)
+			}
+		})
+	}
+}
