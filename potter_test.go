@@ -26,6 +26,9 @@ func TestBuyHarryPotter(t *testing.T) {
 		{1, 1, 1, 0, 0, 21.6},
 		{1, 1, 1, 1, 0, 25.6},
 		{1, 1, 1, 1, 1, 30.0},
+		{3, 1, 0, 0, 0, 31.2},
+		{5, 1, 2, 1, 0, 64.8},
+		{3, 1, 2, 1, 1, 53.2},
 	}
 	for _, c := range testCases {
 		t.Run(fmt.Sprintf(
