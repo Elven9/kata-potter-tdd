@@ -16,11 +16,21 @@ func BuyHarryPotter(
 	for {
 		var tmp float32
 		totalBooks := 0
+		nextDiscount := 0
 		for i := 0; i < len(requestBooks); i++ {
 			if requestBooks[i] > 0 {
 				totalBooks += 1
 				requestBooks[i] -= 1
+				if requestBooks[i] > 0 {
+					nextDiscount += 1
+				}
 			}
+		}
+
+		// Edge Cases: 5 + 3 < 4 + 4
+		if totalBooks == 5 && nextDiscount == 3 {
+			totalBooks = 4
+			requestBooks[len(requestBooks)-1] += 1
 		}
 
 		switch totalBooks {
